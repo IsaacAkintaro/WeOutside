@@ -1,4 +1,4 @@
-from openai import OpenAI
+import openai
 import streamlit as st
 import time
 
@@ -6,18 +6,18 @@ import time
 
 assistant_id = st.secrets["OPENAI_ASSISTANT_ID"]
 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+#client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-#client = openai
+client = openai
 
 if "start_chat" not in st.session_state:
     st.session_state.start_chat = False
 if "thread_id" not in st.session_state:
     st.session_state.thread_id = None
 
-st.set_page_config(page_title="The One Task", page_icon=":speech_balloon:")
+st.set_page_config(page_title="Black Events", page_icon=":speech_balloon:")
 
-#openai.api_key = "sk-insert Your OpenAI API Key"
+openai.api_key =  st.secrets["OPENAI_API_KEY"]
 
 if st.sidebar.button("Start Chat"):
     st.session_state.start_chat = True
@@ -36,7 +36,8 @@ if st.button("Exit Chat"):
 
 if st.session_state.start_chat:
     if "openai_model" not in st.session_state:
-        st.session_state.openai_model = "gpt-4o-2024-08-06"
+        #st.session_state.openai_model = "gpt-4o-2024-08-06"
+        st.session_state.openai_model = "gpt-3.5-turbo-16k-0613"
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
